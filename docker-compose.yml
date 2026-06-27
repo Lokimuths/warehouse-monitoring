@@ -1,0 +1,16 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  app:
+    build: .
+    environment:
+      RABBITMQ_HOST: rabbitmq
+    ports:
+      - "3344:3344/udp"
+      - "3355:3355/udp"
+    depends_on:
+      - rabbitmq
